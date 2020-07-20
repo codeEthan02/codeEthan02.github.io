@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>字节一面记录 | CodeEthan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="7.16 字节客户端一面1. 自我介绍2. 线程间的通信方式 *互斥量 * Mutex： 互斥量是内核对象，只有拥有互斥对象的线程才有访问互斥资源的权限。因为互斥对象只有一个，所以可以保证互斥资源不会被多个线程同时访问；当前拥有互斥对象的线程处理完任务后必须将互斥对象交出，以便其他线程访问该资源；  信号量 Semaphore：信号量是内核对象，它允许同一时刻多个线程访问同一资源，但是需要控制同一">
+  <meta name="description" content="7.16 一面1. 自我介绍2. 线程间的通信方式 *互斥量 * Mutex： 互斥量是内核对象，只有拥有互斥对象的线程才有访问互斥资源的权限。因为互斥对象只有一个，所以可以保证互斥资源不会被多个线程同时访问；当前拥有互斥对象的线程处理完任务后必须将互斥对象交出，以便其他线程访问该资源；  信号量 Semaphore：信号量是内核对象，它允许同一时刻多个线程访问同一资源，但是需要控制同一时刻访问此">
 <meta property="og:type" content="article">
 <meta property="og:title" content="字节一面记录">
 <meta property="og:url" content="http://yoursite.com/2020/07/16/%E5%AD%97%E8%8A%82%E4%B8%80%E9%9D%A2%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="CodeEthan">
-<meta property="og:description" content="7.16 字节客户端一面1. 自我介绍2. 线程间的通信方式 *互斥量 * Mutex： 互斥量是内核对象，只有拥有互斥对象的线程才有访问互斥资源的权限。因为互斥对象只有一个，所以可以保证互斥资源不会被多个线程同时访问；当前拥有互斥对象的线程处理完任务后必须将互斥对象交出，以便其他线程访问该资源；  信号量 Semaphore：信号量是内核对象，它允许同一时刻多个线程访问同一资源，但是需要控制同一">
+<meta property="og:description" content="7.16 一面1. 自我介绍2. 线程间的通信方式 *互斥量 * Mutex： 互斥量是内核对象，只有拥有互斥对象的线程才有访问互斥资源的权限。因为互斥对象只有一个，所以可以保证互斥资源不会被多个线程同时访问；当前拥有互斥对象的线程处理完任务后必须将互斥对象交出，以便其他线程访问该资源；  信号量 Semaphore：信号量是内核对象，它允许同一时刻多个线程访问同一资源，但是需要控制同一时刻访问此">
 <meta property="og:image" content="https://camo.githubusercontent.com/e4c40f7f89eea7dd3ba62ac3fbe334bd4e569d27/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f33333537363834392d393237352d343762622d616461372d3864656435663565376337332e706e67">
 <meta property="og:image" content="https://camo.githubusercontent.com/d650ccc4ec1a0c99171582d9ccc9a5003155496f/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f39373039363934622d646230352d346363652d386432662d3163386230396634643932312e706e67">
 <meta property="article:published_time" content="2020-07-16T07:55:59.918Z">
-<meta property="article:modified_time" content="2020-07-16T20:08:33.330Z">
+<meta property="article:modified_time" content="2020-07-20T16:12:53.946Z">
 <meta property="article:author" content="Ethan">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://camo.githubusercontent.com/e4c40f7f89eea7dd3ba62ac3fbe334bd4e569d27/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f33333537363834392d393237352d343762622d616461372d3864656435663565376337332e706e67">
@@ -152,7 +152,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="7-16-字节客户端一面"><a href="#7-16-字节客户端一面" class="headerlink" title="7.16 字节客户端一面"></a>7.16 字节客户端一面</h1><h2 id="1-自我介绍"><a href="#1-自我介绍" class="headerlink" title="1. 自我介绍"></a>1. 自我介绍</h2><h2 id="2-线程间的通信方式"><a href="#2-线程间的通信方式" class="headerlink" title="2. 线程间的通信方式"></a>2. 线程间的通信方式</h2><ul>
+        <h1 id="7-16-一面"><a href="#7-16-一面" class="headerlink" title="7.16 一面"></a>7.16 一面</h1><h2 id="1-自我介绍"><a href="#1-自我介绍" class="headerlink" title="1. 自我介绍"></a>1. 自我介绍</h2><h2 id="2-线程间的通信方式"><a href="#2-线程间的通信方式" class="headerlink" title="2. 线程间的通信方式"></a>2. 线程间的通信方式</h2><ul>
 <li><p>*<em>互斥量 *</em> Mutex： 互斥量是内核对象，只有拥有互斥对象的线程才有访问互斥资源的权限。因为互斥对象只有一个，所以可以保证互斥资源不会被多个线程同时访问；当前拥有互斥对象的线程处理完任务后必须将互斥对象交出，以便其他线程访问该资源；</p>
 </li>
 <li><p><strong>信号量</strong> Semaphore：信号量是内核对象，它允许同一时刻多个线程访问同一资源，但是需要控制同一时刻访问此资源的最大线程数量。信号量对象保存了<strong>最大资源计数</strong>和<strong>当前可用资源计数</strong>，每增加一个线程对共享资源的访问，当前可用资源计数就减1，只要当前可用资源计数大于0，就可以发出信号量信号，如果为0，则将线程放入一个队列中等待。线程处理完共享资源后，应在离开的同时通过<code>ReleaseSemaphore</code>函数将当前可用资源数加1。如果信号量的取值只能为0或1，那么信号量就成为了互斥量；</p>
@@ -323,6 +323,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/07/20/Java%E4%B8%AD%E5%B7%A6%E7%A7%BB%E5%92%8C%E5%8F%B3%E7%A7%BB%E7%9A%84%E5%8C%BA%E5%88%AB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Java中左移和右移的区别
+        
+      </div>
+    </a>
   
   
     <a href="/2020/07/08/2020-07-08%E5%88%B7%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">

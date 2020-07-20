@@ -129,6 +129,84 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java中左移和右移的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/20/Java%E4%B8%AD%E5%B7%A6%E7%A7%BB%E5%92%8C%E5%8F%B3%E7%A7%BB%E7%9A%84%E5%8C%BA%E5%88%AB/">Java中左移和右移的区别</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/20/Java%E4%B8%AD%E5%B7%A6%E7%A7%BB%E5%92%8C%E5%8F%B3%E7%A7%BB%E7%9A%84%E5%8C%BA%E5%88%AB/" class="archive-article-date">
+  	<time datetime="2020-07-20T16:01:57.074Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>以前一直搞不懂为什么 Java 里左移是 <code>&lt;&lt;</code> 而右移有时是 <code>&gt;&gt;&gt;</code> 有时是 <code>&gt;&gt;</code>。</p>
+<h3 id="左移"><a href="#左移" class="headerlink" title="左移"></a>左移</h3><p>左移的规则只记住一点：丢弃最高位，0 补最低位。</p>
+<p>例如：3 &lt;&lt;2 (3为 int 型)</p>
+<p>　　1）把3转换为二进制数字 0000 0000 0000 0000 0000 0000 0000 0011，</p>
+<p>　　2）把该数字高位(左侧)的两个零移出，其他的数字都朝左平移 2 位，</p>
+<p>　　3）在低位(右侧)的两个空位补零。则得到的最终结果是 0000 0000 0000 0000 0000 0000 0000 1100，</p>
+<p>　　转换为十进制是 12。</p>
+<h3 id="右移"><a href="#右移" class="headerlink" title="右移"></a>右移</h3><p>右移的规则只记住一点：符号位不变，左边补上符号位。</p>
+<p>按二进制形式把所有的数字向右移动对应的位数，低位移出(舍弃)，高位的空位补符号位，即正数补零，负数补 1</p>
+<p>11 &gt;&gt;2 (11为int型)</p>
+<p>　　1) 11 的二进制形式为：0000 0000 0000 0000 0000 0000 0000 1011</p>
+<p>　　2) 把低位的最后两个数字移出，因为该数字是正数，所以在高位补零。</p>
+<p>　　3) 最终结果是 0000 0000 0000 0000 0000 0000 0000 0010。</p>
+<p>　　转换为十进制是 2。</p>
+<h3 id="无符号右移"><a href="#无符号右移" class="headerlink" title="无符号右移"></a>无符号右移</h3><p>无符号右移的规则只记住一点：忽略了符号位扩展，0 补最高位</p>
+<p>无符号右移规则和右移运算是一样的，只是填充时不管左边的数字是正是负都用 0 来填充，无符号右移运算只针对负数计算，因为对于正数来说这种运算没有意义。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/20/Java%E4%B8%AD%E5%B7%A6%E7%A7%BB%E5%92%8C%E5%8F%B3%E7%A7%BB%E7%9A%84%E5%8C%BA%E5%88%AB/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-字节一面记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -149,7 +227,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="7-16-字节客户端一面"><a href="#7-16-字节客户端一面" class="headerlink" title="7.16 字节客户端一面"></a>7.16 字节客户端一面</h1><h2 id="1-自我介绍"><a href="#1-自我介绍" class="headerlink" title="1. 自我介绍"></a>1. 自我介绍</h2><h2 id="2-线程间的通信方式"><a href="#2-线程间的通信方式" class="headerlink" title="2. 线程间的通信方式"></a>2. 线程间的通信方式</h2><ul>
+        <h1 id="7-16-一面"><a href="#7-16-一面" class="headerlink" title="7.16 一面"></a>7.16 一面</h1><h2 id="1-自我介绍"><a href="#1-自我介绍" class="headerlink" title="1. 自我介绍"></a>1. 自我介绍</h2><h2 id="2-线程间的通信方式"><a href="#2-线程间的通信方式" class="headerlink" title="2. 线程间的通信方式"></a>2. 线程间的通信方式</h2><ul>
 <li><p>*<em>互斥量 *</em> Mutex： 互斥量是内核对象，只有拥有互斥对象的线程才有访问互斥资源的权限。因为互斥对象只有一个，所以可以保证互斥资源不会被多个线程同时访问；当前拥有互斥对象的线程处理完任务后必须将互斥对象交出，以便其他线程访问该资源；</p>
 </li>
 <li><p><strong>信号量</strong> Semaphore：信号量是内核对象，它允许同一时刻多个线程访问同一资源，但是需要控制同一时刻访问此资源的最大线程数量。信号量对象保存了<strong>最大资源计数</strong>和<strong>当前可用资源计数</strong>，每增加一个线程对共享资源的访问，当前可用资源计数就减1，只要当前可用资源计数大于0，就可以发出信号量信号，如果为0，则将线程放入一个队列中等待。线程处理完共享资源后，应在离开的同时通过<code>ReleaseSemaphore</code>函数将当前可用资源数加1。如果信号量的取值只能为0或1，那么信号量就成为了互斥量；</p>
