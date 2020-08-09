@@ -129,6 +129,157 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-毕业旅行问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/09/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C%E9%97%AE%E9%A2%98/">毕业旅行问题</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/09/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2020-08-09T02:55:46.913Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="字节笔试题——毕业旅行问题"><a href="#字节笔试题——毕业旅行问题" class="headerlink" title="字节笔试题——毕业旅行问题"></a>字节笔试题——毕业旅行问题</h3><hr>
+<p><a href="https://www.nowcoder.com/test/question/done?tid=35655290&qid=362294#summary" target="_blank" rel="noopener">题目链接</a></p>
+<p>小明目前在做一份毕业旅行的规划。打算从北京出发，分别去若干个城市，然后再回到北京，每个城市之间均乘坐高铁，且每个城市只去一次。由于经费有限，希望能够通过合理的路线安排尽可能的省一些路上的花销。给定一组城市和每对城市之间的火车票的价钱，找到每个城市只访问一次并返回起点的最小车费花销。</p>
+<h5 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述:"></a><strong>输入描述:</strong></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">城市个数n（1&lt;n≤20，包括北京）</span><br><span class="line"></span><br><span class="line">城市间的车票价钱 n行n列的矩阵 m[n][n]</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="输出描述"><a href="#输出描述" class="headerlink" title="输出描述:"></a><strong>输出描述:</strong></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最小车费花销 s</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="输入例子1"><a href="#输入例子1" class="headerlink" title="输入例子1:"></a><strong>输入例子1:</strong></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">0 2 6 5</span><br><span class="line">2 0 4 4</span><br><span class="line">6 4 0 2</span><br><span class="line">5 4 2 0</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="输出例子1"><a href="#输出例子1" class="headerlink" title="输出例子1:"></a><strong>输出例子1:</strong></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">13</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="例子说明1"><a href="#例子说明1" class="headerlink" title="例子说明1:"></a><strong>例子说明1:</strong></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">共 4 个城市，城市 1 和城市 1 的车费为0，城市 1 和城市 2 之间的车费为 2，城市 1 和城市 3 之间的车费为 6，城市 1 和城市 4 之间的车费为 5，依次类推。假设任意两个城市之间均有单程票可购买，且票价在1000元以内，无需考虑极端情况。</span><br></pre></td></tr></table></figure>
+
+<p>讨论区以及博客大多数都是用的遗传算法 (GA) 来解，我看了半天实在是没看明白，直到看到了<a href="https://blog.csdn.net/seagal890/article/details/95041143" target="_blank" rel="noopener">这篇博客</a>，使用了回溯算法，根据他的思路，写出了这个题，虽然是超时了，但起码答案是正确了。牛客讨论区大家也都是超时了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Main main = <span class="keyword">new</span> Main();</span><br><span class="line">        System.out.println(main.travel());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">travel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = Integer.MAX_VALUE;</span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 城市数目</span></span><br><span class="line">        <span class="keyword">int</span> N = sc.nextInt();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 二维矩阵代表城市以及花费</span></span><br><span class="line">        <span class="keyword">int</span>[][] map = <span class="keyword">new</span> <span class="keyword">int</span>[N][N];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">                map[i][j] = sc.nextInt();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 用 boolean 数组记录城市是否被访问过</span></span><br><span class="line">        <span class="keyword">boolean</span>[] visited = <span class="keyword">new</span> <span class="keyword">boolean</span>[N];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 起始位置已被访问</span></span><br><span class="line">        visited[<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">        res = bfs(map, visited, <span class="number">0</span>, N, <span class="number">1</span>, <span class="number">0</span>, res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">bfs</span><span class="params">(<span class="keyword">int</span>[][] map, <span class="keyword">boolean</span>[] visited, <span class="keyword">int</span> currPos, <span class="keyword">int</span> N, <span class="keyword">int</span> count, <span class="keyword">int</span> cost, <span class="keyword">int</span> res)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 若所有城市都已被访问，即 count 等于城市数目 N， 则返回当前花费加上当前城市到起点的花费</span></span><br><span class="line">        <span class="keyword">if</span> (N == count &amp;&amp; map[currPos][<span class="number">0</span>] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            res = Math.min(res, cost + map[currPos][<span class="number">0</span>]);</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// BFS 深度遍历</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (visited[i] == <span class="keyword">false</span> &amp;&amp; map[currPos][i] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                visited[i] = <span class="keyword">true</span>;</span><br><span class="line">                res = bfs(map, visited, i, N, count + <span class="number">1</span>, cost + map[currPos][i], res);</span><br><span class="line">                visited[i] = <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200809110116228.png" alt="image-20200809110116228"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/09/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-7.31面试记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/31/7.31%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/">7.31面试记录</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/31/7.31%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/" class="archive-article-date">
+  	<time datetime="2020-07-31T06:17:08.966Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="上海韦地-实习面试记录"><a href="#上海韦地-实习面试记录" class="headerlink" title="上海韦地 实习面试记录"></a>上海韦地 实习面试记录</h1><h3 id="1-项目有什么模块"><a href="#1-项目有什么模块" class="headerlink" title="1. 项目有什么模块"></a>1. 项目有什么模块</h3><h3 id="2-事务是如何使用的"><a href="#2-事务是如何使用的" class="headerlink" title="2. 事务是如何使用的"></a>2. 事务是如何使用的</h3><h3 id="3-Spring-Boot-中全局-bean-的作用域"><a href="#3-Spring-Boot-中全局-bean-的作用域" class="headerlink" title="3. Spring Boot 中全局 bean 的作用域"></a>3. Spring Boot 中全局 bean 的作用域</h3><h3 id="4-Java-多线程的创建方法"><a href="#4-Java-多线程的创建方法" class="headerlink" title="4. Java 多线程的创建方法"></a>4. Java 多线程的创建方法</h3><h3 id="5-Http-请求是单线程的还是多线程的"><a href="#5-Http-请求是单线程的还是多线程的" class="headerlink" title="5. Http 请求是单线程的还是多线程的"></a>5. Http 请求是单线程的还是多线程的</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">浏览器本身是多线程程序，但是单个的 http 请求是单线程的。</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-MyBatis-的优缺点"><a href="#6-MyBatis-的优缺点" class="headerlink" title="6. MyBatis 的优缺点"></a>6. MyBatis 的优缺点</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/31/7.31%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-7.22二面" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -213,13 +364,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/20/Java%E4%B8%AD%E5%B7%A6%E7%A7%BB%E5%92%8C%E5%8F%B3%E7%A7%BB%E7%9A%84%E5%8C%BA%E5%88%AB/">Java中左移和右移的区别</a>
+      <a class="article-title" href="/2020/07/21/Java%E4%B8%AD%E5%B7%A6%E7%A7%BB%E5%92%8C%E5%8F%B3%E7%A7%BB%E7%9A%84%E5%8C%BA%E5%88%AB/">Java中左移和右移的区别</a>
     </h1>
   
 
         
-        <a href="/2020/07/20/Java%E4%B8%AD%E5%B7%A6%E7%A7%BB%E5%92%8C%E5%8F%B3%E7%A7%BB%E7%9A%84%E5%8C%BA%E5%88%AB/" class="archive-article-date">
-  	<time datetime="2020-07-20T16:01:57.074Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-20</time>
+        <a href="/2020/07/21/Java%E4%B8%AD%E5%B7%A6%E7%A7%BB%E5%92%8C%E5%8F%B3%E7%A7%BB%E7%9A%84%E5%8C%BA%E5%88%AB/" class="archive-article-date">
+  	<time datetime="2020-07-20T16:01:57.074Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-21</time>
 </a>
         
       </header>
@@ -254,7 +405,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/20/Java%E4%B8%AD%E5%B7%A6%E7%A7%BB%E5%92%8C%E5%8F%B3%E7%A7%BB%E7%9A%84%E5%8C%BA%E5%88%AB/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/07/21/Java%E4%B8%AD%E5%B7%A6%E7%A7%BB%E5%92%8C%E5%8F%B3%E7%A7%BB%E7%9A%84%E5%8C%BA%E5%88%AB/">展开全文 >></a>
         </p>
       
 
@@ -512,13 +663,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/04/Linux%20%E9%87%8D%E7%82%B9%E7%AC%94%E8%AE%B0/">Linux 重点笔记</a>
+      <a class="article-title" href="/2020/07/05/Linux%20%E9%87%8D%E7%82%B9%E7%AC%94%E8%AE%B0/">Linux 重点笔记</a>
     </h1>
   
 
         
-        <a href="/2020/07/04/Linux%20%E9%87%8D%E7%82%B9%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2020-07-04T19:53:38.558Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-04</time>
+        <a href="/2020/07/05/Linux%20%E9%87%8D%E7%82%B9%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2020-07-04T19:53:38.558Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-05</time>
 </a>
         
       </header>
@@ -682,7 +833,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/04/Linux%20%E9%87%8D%E7%82%B9%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/07/05/Linux%20%E9%87%8D%E7%82%B9%E7%AC%94%E8%AE%B0/">展开全文 >></a>
         </p>
       
 
