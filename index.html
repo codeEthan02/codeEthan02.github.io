@@ -129,6 +129,83 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-由一道笔试题引发的Java基础问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/13/%E7%94%B1%E4%B8%80%E9%81%93%E7%AC%94%E8%AF%95%E9%A2%98%E5%BC%95%E5%8F%91%E7%9A%84Java%E5%9F%BA%E7%A1%80%E9%97%AE%E9%A2%98/">由一道笔试题引发的Java基础问题</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/13/%E7%94%B1%E4%B8%80%E9%81%93%E7%AC%94%E8%AF%95%E9%A2%98%E5%BC%95%E5%8F%91%E7%9A%84Java%E5%9F%BA%E7%A1%80%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2020-08-12T19:35:29.161Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Java-基础！！！"><a href="#Java-基础！！！" class="headerlink" title="Java 基础！！！"></a>Java 基础！！！</h3><ul>
+<li><p>今天在做一道<a href="https://www.nowcoder.com/practice/5afcf93c419a4aa793e9b325d01957e2?tpId=137&tags=&title=&diffculty=0&judgeStatus=0&rp=1" target="_blank" rel="noopener">字节笔试题–特征提取</a>的时候，自己将特征封装成了一个对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Char</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> x, y;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Char</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.x = x;</span><br><span class="line">            <span class="keyword">this</span>.y = y;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后出现了一个问题：相同的 x 和相同的 y，竟然不能被识别为同一个特征。然后我选择重写  <code>equals()</code>和 <code>hashcode()</code>方法，这是一开始的版本。</p>
+<p><img src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200813035050951.png" alt="image-20200813035050951"></p>
+<p>发现会报错，不能被 override。后来查询博客，发现<code>euqlas()</code>方法需要传入 Object 对象，在判断是否是该对象的实例后，再判断各属性相等。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="number">131</span> * x + <span class="number">31</span> * y;</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">          <span class="keyword">if</span> (!(obj <span class="keyword">instanceof</span> Char)) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  </span><br><span class="line">          Char that = (Char)obj;</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">this</span>.x == that.x &amp;&amp; <span class="keyword">this</span>.y == that.y;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自动装箱拆箱</p>
+<p><img src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200813035919432.png" alt="image-20200813035919432"></p>
+<p>如图，从 <code>list</code> 中取出元素时，由于存入的是 <code>Integer</code> 型变量，所以用 <code>==</code>  或者<code>!=</code> 会报错，建议使用数字对象的 <code>equals()</code> 方法。但是，当改变其值时，只可用 <code>==</code> 或者 <code>!=</code>，因为在进行运算时，会涉及自动拆箱，数字变量自动向下转型。如图所示。</p>
+<p><img src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200813040120548.png" alt="image-20200813040120548"></p>
+</li>
+</ul>
+<h3 id="Java-基础还是要重视，不然编写代码会有太多的磕磕绊绊！"><a href="#Java-基础还是要重视，不然编写代码会有太多的磕磕绊绊！" class="headerlink" title="Java 基础还是要重视，不然编写代码会有太多的磕磕绊绊！"></a>Java 基础还是要重视，不然编写代码会有太多的磕磕绊绊！</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/13/%E7%94%B1%E4%B8%80%E9%81%93%E7%AC%94%E8%AF%95%E9%A2%98%E5%BC%95%E5%8F%91%E7%9A%84Java%E5%9F%BA%E7%A1%80%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-毕业旅行问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
