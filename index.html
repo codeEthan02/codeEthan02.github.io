@@ -129,6 +129,86 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-解决国内访问 GitHub 速度慢的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/29/%E8%A7%A3%E5%86%B3%E5%9B%BD%E5%86%85%E8%AE%BF%E9%97%AE%20GitHub%20%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/">解决国内访问 GitHub 速度慢的问题</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/29/%E8%A7%A3%E5%86%B3%E5%9B%BD%E5%86%85%E8%AE%BF%E9%97%AE%20GitHub%20%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2020-08-29T08:48:09.563Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>回国了发现访问 GitHub 太慢了，甚至经常有打不开的情况，于是配置了 hosts，终于可以流畅访问 GitHub 了。</p>
+<h3 id="修改本地-hosts-文件"><a href="#修改本地-hosts-文件" class="headerlink" title="修改本地 hosts 文件"></a>修改本地 hosts 文件</h3><ol>
+<li><p>Windows 操作系统的 hosts 文件位置：C:\Windows\System32\drivers\etc\hosts，用文本编辑器打开。</p>
+</li>
+<li><p>访问 <a href="https://www.ipaddress.com，找到" target="_blank" rel="noopener">https://www.ipaddress.com，找到</a> <code>IP Adress Tools</code> 里的 <code>IP Adress Lookup</code> ，分别查询 <code>github.global.ssl.fastly.net</code> 和 <code>github.com</code> 的 IP 地址。</p>
+</li>
+<li><p>在 hosts 文件中添加映射，我的是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Github</span><br><span class="line"><span class="number">199.232</span><span class="number">.69</span><span class="number">.194</span> github.global.ssl.fastly.net</span><br><span class="line"><span class="number">140.82</span><span class="number">.112</span><span class="number">.3</span> github.com</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="cmd-操作"><a href="#cmd-操作" class="headerlink" title="cmd 操作"></a>cmd 操作</h3><ol>
+<li>打开 cmd，执行 <code>ipconfig /flushdns</code> 命令，刷新 dns， 绕过dns解析，在本地直接绑定 host。</li>
+<li>这时 执行 <code>ping github.com</code>，查看网络状况</li>
+</ol>
+<p>此时，比起原来的 100% 丢包，以及无法访问网站，已经好了很多了。</p>
+<p><img src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200829170009908.png" alt="image-20200829170009908"></p>
+<p>完美解决！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/29/%E8%A7%A3%E5%86%B3%E5%9B%BD%E5%86%85%E8%AE%BF%E9%97%AE%20GitHub%20%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-由一道笔试题引发的Java基础问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
