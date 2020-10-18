@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="CodeEthan">
 <meta property="og:description" content="Linux 重点笔记1. Linux文件系统 Linux 系统中万物皆文件。文件系统分为 inode 和block。文件存储在硬盘上，硬盘的最小存储单位是扇区(Sector),每个扇区存储512字节(0.5kb)。 操作系统读取硬盘的数据时，不会一个扇区一个扇区的读取，这样做效率较低，而是一次读取多个扇区， 即一次读取一个块(block)。块由多个扇区组成，是文件读取的最小单位，块的最常见的大小是">
 <meta property="article:published_time" content="2020-07-04T19:53:38.558Z">
-<meta property="article:modified_time" content="2020-07-05T00:35:13.410Z">
+<meta property="article:modified_time" content="2020-10-18T06:42:37.669Z">
 <meta property="article:author" content="Ethan">
 <meta name="twitter:card" content="summary">
   
@@ -294,6 +294,26 @@
 <p>僵尸进程通过 ps 命令显示出来的状态为 Z（zombie）。</p>
 <p>系统所能使用的进程号是有限的，如果产生大量僵尸进程，将因为没有可用的进程号而导致系统不能产生新的进程。</p>
 <p>要消灭系统中大量的僵尸进程，只需要将其父进程杀死，此时僵尸进程就会变成孤儿进程，从而被 init 进程所收养，这样 init 进程就会释放所有的僵尸进程所占有的资源，从而结束僵尸进程。</p>
+<h3 id="5-管道指令"><a href="#5-管道指令" class="headerlink" title="5 管道指令"></a>5 管道指令</h3><p>管道是将一个命令的标准输出作为另一个命令的标准输入，在数据需要经过多个步骤的处理之后才能得到我们想要的内容时就可以使用管道。</p>
+<p>在命令之间使用 | 分隔各个管道命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls -al /etc | less</span><br></pre></td></tr></table></figure>
+
+<h2 id="提取指令"><a href="#提取指令" class="headerlink" title="提取指令"></a>提取指令</h2><p>cut 对数据进行切分，取出想要的部分。</p>
+<p>切分过程一行一行地进行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cut</span><br><span class="line">-d ：分隔符</span><br><span class="line">-f ：经过 -d 分隔后，使用 -f n 取出第 n 个区间</span><br><span class="line">-c ：以字符为单位取出区间</span><br></pre></td></tr></table></figure>
+
+<p>示例 1：last 显示登入者的信息，取出用户名。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ last</span><br><span class="line">root pts/1 192.168.201.101 Sat Feb 7 12:35 still logged <span class="keyword">in</span></span><br><span class="line">root pts/1 192.168.201.101 Fri Feb 6 12:13 - 18:46 (06:33)</span><br><span class="line">root pts/1 192.168.201.254 Thu Feb 5 22:37 - 23:53 (01:16)</span><br><span class="line"></span><br><span class="line">$ last | cut -d <span class="string">' '</span> -f 1</span><br></pre></td></tr></table></figure>
+
+<p>示例 2：将 export 输出的信息，取出第 12 字符以后的所有字符串。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">export</span></span><br><span class="line"><span class="built_in">declare</span> -x HISTCONTROL=<span class="string">"ignoredups"</span></span><br><span class="line"><span class="built_in">declare</span> -x HISTSIZE=<span class="string">"1000"</span></span><br><span class="line"><span class="built_in">declare</span> -x HOME=<span class="string">"/home/dmtsai"</span></span><br><span class="line"><span class="built_in">declare</span> -x HOSTNAME=<span class="string">"study.centos.vbird"</span></span><br><span class="line">.....(其他省略).....</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">export</span> | cut -c 12-</span><br></pre></td></tr></table></figure>
+
+<h2 id="排序指令"><a href="#排序指令" class="headerlink" title="排序指令"></a>排序指令</h2><p><strong>sort</strong> 用于排序。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ sort [-fbMnrtuk] [file or stdin]</span><br><span class="line">-f ：忽略大小写</span><br><span class="line">-b ：忽略最前面的空格</span><br><span class="line">-M ：以月份的名字来排序，例如 JAN，DEC</span><br><span class="line">-n ：使用数字</span><br><span class="line">-r ：反向排序</span><br><span class="line">-u ：相当于 unique，重复的内容只出现一次</span><br><span class="line">-t ：分隔符，默认为 tab</span><br><span class="line">-k ：指定排序的区间</span><br></pre></td></tr></table></figure>
+
+<p>示例：/etc/passwd 文件内容以 : 来分隔，要求以第三列进行排序。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/passwd | sort -t <span class="string">':'</span> -k 3</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">dmtsai:x:1000:1000:dmtsai:/home/dmtsai:/bin/bash</span><br><span class="line">alex:x:1001:1002::/home/alex:/bin/bash</span><br><span class="line">arod:x:1002:1003::/home/arod:/bin/bash</span><br></pre></td></tr></table></figure>
+
 
       
 
